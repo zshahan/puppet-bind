@@ -120,7 +120,8 @@ define bind::server::conf (
   $views                  = {},
   $rfc1912_file           = $::bind::params::rfc1912_file,
   $root_file              = $::bind::params::root_file,
-) inherits bind::params {
+  $interface_interval     = undef,
+) {
 
   # Everything is inside a single template
   file { $title:
