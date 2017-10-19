@@ -76,7 +76,7 @@ options {
     allow-recursion { <%= @allow_recursion.join("; ") %>; };
 <% end -%>
 <% if @interface_interval -%>
-    interface_interval <%= @interface_interval %>;
+    interface-interval <%= @interface_interval %>;
 <% end -%>
 <% if !@allow_transfer.empty? -%>
     allow-transfer { <%= @allow_transfer.join("; ") %>; };
