@@ -55,6 +55,19 @@
 #  $zones:
 #   Hash of managed zones and their configuration. The key is the zone name
 #   and the value is an array of config lines. Default: empty
+#  $statistics_channels:
+#   Hash of managed statistics_channels and their configuration. Default: empty
+#   Example:
+#    statistics_channels => [
+#      {'listen_address' => '127.0.0.1',
+#        'listen_port' => '8080',
+#        'allowed_sources' => [ '127.0.0.1' ]
+#      },
+#      {'listen_address' => '10.10.10.10',
+#        'listen_port' => '8081',
+#        'allowed_sources' => [ '127.0.0.1' ]
+#      },
+#    ]
 #  $tsig:
 #   Hash of managed tsig keys and their configuration. The key is the tsig keys name
 #   and the value is an array of config lines. Default: empty
@@ -121,6 +134,7 @@ define bind::server::conf (
   $rfc1912_file           = $::bind::params::rfc1912_file,
   $root_file              = $::bind::params::root_file,
   $interface_interval     = undef,
+  $statistics_channels    = undef,
 ) {
 
   # Everything is inside a single template
