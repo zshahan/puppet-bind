@@ -101,6 +101,14 @@ options {
     bindkeys-file "/etc/named.iscdlv.key";
 };
 
+<% if !@statistics_channels.empty? -%>
+statistics-channels {
+<% @statistics_channels.each do |statistics_channel| -%>
+   inet <%= statistics_channel['listen_address'] -%> port <%= statistics_channel['listen_port'] -%> allow { <% statistics_channel['allowed_sources'].each do |source| -%><%= source -%>; <% end -%> };
+<% end -%>
+}
+<% end -%>
+
 logging {
     channel main_log {
         file "/var/log/named/named.log" versions 3 size 5m;
