@@ -106,7 +106,7 @@ statistics-channels {
 <% @statistics_channels.each do |statistics_channel| -%>
    inet <%= statistics_channel['listen_address'] -%> port <%= statistics_channel['listen_port'] -%> allow { <% statistics_channel['allowed_sources'].each do |source| -%><%= source -%>; <% end -%> };
 <% end -%>
-}
+};
 <% end -%>
 
 logging {
