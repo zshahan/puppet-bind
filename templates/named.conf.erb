@@ -78,6 +78,9 @@ options {
 <% if !@allow_recursion.empty? -%>
     allow-recursion { <%= @allow_recursion.join("; ") %>; };
 <% end -%>
+<% if @interface_interval -%>
+    interface-interval <%= @interface_interval %>;
+<% end -%>
 <% if !@allow_transfer.empty? -%>
     allow-transfer { <%= @allow_transfer.join("; ") %>; };
 <% end -%>
@@ -95,11 +98,21 @@ options {
 <% end -%>
     dnssec-enable <%= @dnssec_enable %>;
     dnssec-validation <%= @dnssec_validation %>;
+<% if @dnssec_lookaside -%>
     dnssec-lookaside <%= @dnssec_lookaside %>;
+<% end -%>
 
     /* Path to ISC DLV key */
     bindkeys-file "/etc/named.iscdlv.key";
 };
+
+<% if !@statistics_channels.empty? -%>
+statistics-channels {
+<% @statistics_channels.each do |statistics_channel| -%>
+   inet <%= statistics_channel['listen_address'] -%> port <%= statistics_channel['listen_port'] -%> allow { <% statistics_channel['allowed_sources'].each do |source| -%><%= source -%>; <% end -%> };
+<% end -%>
+};
+<% end -%>
 
 logging {
     channel main_log {
